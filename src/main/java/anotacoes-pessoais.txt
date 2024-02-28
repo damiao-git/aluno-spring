@@ -1,0 +1,18 @@
+Passos para criação do projeto
+1 - Criação do Projeto no Spring Initializr com as seguintes dependências:
+    a - Java Spring Web
+    b - Mysql
+    c - JPA
+    d - Validation
+
+2 - Criação do BD e conexão
+    a - Arquivo application.properties(username, password, url do banco,
+        link do driver jdbc, hibernate=update)
+    b - Package entities e classe Aluno
+    c - Mapeamento da classe para criação da tabela no banco de dados
+    d - Package controllers e classe AlunoController("CRUD")
+
+3 - Repositories
+    a - Package Repositories e classe AlunoRepository
+    b - Classe AlunoRepository extende JpaRepository
+    c - Instanciar @Autowired o AlunoRepository dentro do Controller e criar o método GET
