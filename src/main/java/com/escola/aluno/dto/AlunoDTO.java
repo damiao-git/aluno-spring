@@ -1,29 +1,24 @@
-package com.escola.aluno.entities;
+package com.escola.aluno.dto;
 
-import com.escola.aluno.dto.AlunoDTO;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.*;
+import com.escola.aluno.entities.Aluno;
+import jakarta.persistence.Column;
 import org.springframework.beans.BeanUtils;
 
 import java.util.Date;
 
-@Entity(name = "aluno")
-@Table(name = "tb_aluno")
-public class Aluno {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AlunoDTO{
     private int id;
-    @Column (name = "name", nullable = false)
+
     private String name;
-    @Column (name = "nascimento", nullable = false)
+
     private Date dataDeNascimento;
 
-    public Aluno(AlunoDTO aluno){
+    public AlunoDTO(Aluno aluno){
         BeanUtils.copyProperties(aluno, this);
     }
+    public AlunoDTO(){}
 
-    public Aluno() {}
-    public Aluno(int id, String name, Date dataDeNascimento){
+    public AlunoDTO(int id, String name, Date dataDeNascimento) {
         this.id = id;
         this.name = name;
         this.dataDeNascimento = dataDeNascimento;
@@ -52,4 +47,5 @@ public class Aluno {
     public void setDataDeNascimento(Date dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
     }
+
 }
