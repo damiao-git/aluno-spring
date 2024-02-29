@@ -4,7 +4,6 @@ import com.escola.aluno.dto.AlunoDTO;
 import com.escola.aluno.entities.Aluno;
 import com.escola.aluno.services.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +15,7 @@ public class AlunoController {
     @Autowired
     AlunoService alunoService;
     @GetMapping
-    public List<AlunoDTO> getAllAlunos(){
+    public ResponseEntity<List<Aluno>> getAllAlunos(){
         return alunoService.listarAlunos();
     }
 

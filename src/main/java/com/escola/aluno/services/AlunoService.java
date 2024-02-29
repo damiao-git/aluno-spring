@@ -5,6 +5,8 @@ import com.escola.aluno.entities.Aluno;
 import com.escola.aluno.repositories.AlunoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,9 +16,9 @@ public class AlunoService {
     @Autowired
     private AlunoRepository alunoRepository;
 
-    public List<AlunoDTO> listarAlunos(){
-        List<Aluno> alunos = alunoRepository.findAll();
-        return alunos.stream().map(AlunoDTO::new).toList();
+
+    public ResponseEntity<List<Aluno>> listarAlunos(){
+        return ResponseEntity.status(HttpStatus.OK).body(alunoRepository.findAll());
     }
 
     public AlunoDTO buscarAluno(int id){
@@ -24,11 +26,11 @@ public class AlunoService {
 
     }
 
-    public void salvarAluno(AlunoDTO alunoDTO){
-        Aluno aluno = new Aluno(alunoDTO);
-        alunoRepository.save(aluno);
+    public ResponseEntity<Aluno> salvarAluno(AlunoDTO aluno){
+        var al = new Aluno();
+        BeanUtils.copyProperties(aluno, al);
+        return ResponseEntity.status(HttpStatus.CREATED).body(alunoRepository.save(al));
     }
-
 
     public AlunoDTO editarAluno(AlunoDTO alunoDTO){
         Aluno aluno = new Aluno(alunoDTO);
